@@ -5,6 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClawForge — One Dashboard for All Your AI Assistants</title>
   <meta name="description" content="ClawForge gives you a single dashboard to manage, monitor, and control every OpenClaw AI assistant — whether across your team or across your projects.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ClawForge — One Dashboard for All Your AI Assistants">
+  <meta property="og:description" content="ClawForge is the admin layer for OpenClaw. Centralized control over authentication, tool policies, skill governance, audit trails, and a remote kill switch.">
+  <meta property="og:url" content="https://clawforge.ai">
+  <meta property="og:image" content="https://clawforge.ai/og-image.png">
+  <meta property="og:site_name" content="ClawForge">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ClawForge — One Dashboard for All Your AI Assistants">
+  <meta name="twitter:description" content="ClawForge is the admin layer for OpenClaw. Centralized control over authentication, tool policies, skill governance, audit trails, and a remote kill switch.">
+  <meta name="twitter:image" content="https://clawforge.ai/og-image.png">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ClawForge",
+    "description": "Open-source enterprise governance platform for OpenClaw AI assistants",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Linux, macOS, Windows (Docker)",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": "https://clawforge.co",
+    "downloadUrl": "https://github.com/ClawForgeAI/clawforge",
+    "softwareVersion": "0.1.0",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ClawForge",
+    "url": "https://clawforge.co",
+    "logo": "https://clawforge.co/og-image.png",
+    "sameAs": [
+      "https://github.com/ClawForgeAI"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -189,6 +237,12 @@
       border: 1px solid var(--border);
     }
     .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--text-muted); }
+    .btn-star {
+      background: var(--bg-card);
+      color: var(--orange);
+      border: 1px solid rgba(253, 203, 110, 0.3);
+    }
+    .btn-star:hover { background: var(--bg-card-hover); border-color: var(--orange); }
 
     /* -- The Problem -- */
     .problem {
@@ -599,6 +653,9 @@
         <a href="https://github.com/ClawForgeAI/clawforge" class="btn btn-primary">
           View on GitHub →
         </a>
+        <a href="https://github.com/ClawForgeAI/clawforge" class="btn btn-star" id="star-btn">
+          ★ Star on GitHub <span id="star-count"></span>
+        </a>
         <a href="#features" class="btn btn-secondary">
           See What It Does
         </a>
@@ -855,6 +912,17 @@
       </p>
     </div>
   </footer>
+
+  <script>
+    fetch("https://api.github.com/repos/ClawForgeAI/clawforge")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.stargazers_count != null) {
+          document.getElementById("star-count").textContent = "(" + data.stargazers_count + ")";
+        }
+      })
+      .catch(function() {});
+  </script>
 
 </body>
 </html>
